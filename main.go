@@ -30,7 +30,7 @@ func main() {
 	envCompany := os.Getenv("DB_CONF_COMPANY")
 	// envCurr := os.Getenv("DB_CONF_CURR")
 
-	loop_backupdaily(envCompany)
+	// loop_backupdaily(envCompany)
 
 	s := gocron.NewScheduler(local)
 

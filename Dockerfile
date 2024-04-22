@@ -1,4 +1,4 @@
-FROM golang:alpine AS engine_timer
+FROM golang:alpine AS engine_summary
 
 WORKDIR /appbuilds
 
@@ -11,8 +11,8 @@ RUN go build -o binary
 FROM alpine:latest as agenconsumergeneratorrelease
 WORKDIR /app
 RUN apk add tzdata
-COPY --from=engine_timer /appbuilds/binary .
-COPY --from=engine_timer /appbuilds/.env /app/.env
+COPY --from=engine_summary /appbuilds/binary .
+COPY --from=engine_summary /appbuilds/.env /app/.env
 ENV DB_USER="admindb"
 ENV DB_PASS="asd123QWE"
 ENV DB_HOST="128.199.124.131"

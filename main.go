@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 	"time"
@@ -37,7 +36,7 @@ func main() {
 	s := gocron.NewScheduler(local)
 
 	s.Every(1).Day().At("01:00").Do(func() {
-		log.Println("RUNNING 01:00 AM BACKUP DB")
+		fmt.Println("RUNNING 01:00 AM BACKUP DB")
 		loop_backupdaily(envCompany)
 	})
 	s.StartBlocking()

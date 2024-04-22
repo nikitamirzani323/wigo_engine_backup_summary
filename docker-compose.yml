@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  engine-backupsumary-12d:
+    container_name: engine-backupsumary-12d
+    image: engine-backupsumary-12d:0.0.1
+    build: .
+    restart: always

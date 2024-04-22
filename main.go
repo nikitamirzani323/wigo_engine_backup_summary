@@ -25,7 +25,11 @@ func main() {
 	if err != nil {
 		panic("Failed to load env file")
 	}
+	initRedis := helpers.RedisHealth()
 
+	if !initRedis {
+		panic("cannot load redis")
+	}
 	db.Init()
 	envCompany := os.Getenv("DB_CONF_COMPANY")
 	// envCurr := os.Getenv("DB_CONF_CURR")
@@ -123,6 +127,13 @@ func loop_backupdaily(idcompany string) {
 		}
 
 	}
+
+	Fieldtransaksi2d30s_summarydaily_redis := "AGEN:12D30S:LISTINVOICE:SUMMARYDAILY"
+	key_redis_invoicesummarydaily := strings.ToLower(idcompany) + ":" + Fieldtransaksi2d30s_summarydaily_redis + "_0_"
+	val_invoicesummarydaily_agen := helpers.DeleteRedis(key_redis_invoicesummarydaily)
+	fmt.Println("")
+	fmt.Printf("Redis Delete AGEN INVOICE SUMMARY DAILY : %d - %s \r", val_invoicesummarydaily_agen, key_redis_invoicesummarydaily)
+	fmt.Println("")
 	defer row.Close()
 
 }
